@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block content %}
+	<div class="jumbotron">
+		<div class="container">
+			<h1>Установка</h1>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-md-6 offset-md-3">
+			<h2 class="text-center">Настройки CTF</h2>
+			{% for error in errors %}
+				<div class="submit-row">
+					<div class="alert alert-danger alert-dismissable" role="alert">
+						<span class="sr-only">Error:</span>
+						{{ error }}
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+								aria-hidden="true">×</span></button>
+					</div>
+				</div>
+			{% endfor %}
+			<form method="post" accept-charset="utf-8" autocomplete="off" role="form" class="form-horizontal">
+				<input type="hidden" name="nonce" value="{{ nonce }}">
+				{# This nonce is implemented specially in the route itself #}
+				<div class="form-group">
+					<label>
+						Название CTF<br>
+						<small class="form-text text-muted">
+							Название для этого CTF
+						</small>
+					</label>
+					<input class="form-control" type="text" name="ctf_name"/>
+				</div>
+				<div class="form-group">
+					<label>
+						Никнейм администратора<br>
+						<small class="form-text text-muted">
+							Ваш никнейм для аккаунта администратора
+						</small>
+					</label>
+					<input class="form-control" type="text" name="name"/>
+				</div>
+				<div class="form-group">
+					<label>
+						Электронная почта администратора<br>
+						<small class="form-text text-muted">
+							Ваш адрес электронной почты для аккаунта администратора
+						</small>
+					</label>
+					<input class="form-control" type="email" name="email"/>
+				</div>
+				<div class="form-group">
+					<label>
+						Пароль администратора<br>
+						<small class="form-text text-muted">
+							Ваш пароль для аккаунта администратора
+						</small>
+					</label>
+					<input class="form-control" type="password" name="password"/>
+				</div>
+				<div class="form-group">
+					<label>
+						Режим CTF
+						<small class="form-text text-muted">
+							Режим этого CTF
+						</small>
+					</label>
+					<select class="form-control" name="user_mode">
+						<option value="users">Общий режим</option>
+					</select>
+				</div>
+				<br/>
+				<div class="submit-row text-center">
+					<button type="submit" id="submit" tabindex="5" class="btn btn-md btn-primary btn-outlined">Сохранить
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block scripts %}
+	<script src="{{ url_for('views.themes', theme=get_ctf_theme(), path='js/style.js') }}"></script>
+{% endblock %}
